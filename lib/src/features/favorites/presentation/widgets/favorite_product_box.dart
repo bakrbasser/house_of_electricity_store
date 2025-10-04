@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:house_of_electricity/src/core/presentation/fonts_manager.dart';
 import 'package:house_of_electricity/src/core/presentation/screen_size_helper.dart';
 import 'package:house_of_electricity/src/core/presentation/sizes.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/cubit/favorites_operations/favorites_operations_cubit.dart';
 import 'package:house_of_electricity/src/features/product/domain/entities/product.dart';
+import 'package:house_of_electricity/src/features/product/presentation/widgets/product_boxes_resources.dart';
 
 class FavoriteItemBoxLayout extends StatelessWidget {
   const FavoriteItemBoxLayout({super.key, required this.product});
@@ -31,18 +31,15 @@ class FavoriteItemBoxLayout extends StatelessWidget {
                 SizedBox(
                   height: boxHeight - 16, // subtract padding
                   width: screenWidthPercentage(context, 25),
-                  child: Image.asset(
-                    'assets/images/71xaR3qz7TL.jpg',
-                    fit: BoxFit.cover,
-                  ),
+                  child: ProductImageHelper(imageUrl: product.imageUrl),
                 ),
                 const SizedBox(width: Spacing.small),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(product.name, style: IBMMedium()),
-                      Text('${product.price}\$', style: IBMMedium()),
+                      ProductNameWidget(productName: product.name),
+                      ProductPriceWidget(price: product.price),
                       Spacer(),
                     ],
                   ),

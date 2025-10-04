@@ -6,7 +6,7 @@ class Product {
   final DateTime createdAt;
   final int categoryId;
   final bool isDiscounted;
-  final String imageUrl;
+  final String? imageUrl;
   final bool isAvailable;
   final int quantity;
 

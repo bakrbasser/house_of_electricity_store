@@ -68,6 +68,7 @@ flutter:
     - assets/images/bedsidelamps-2048px-04904-2x1-1.jpg
     - assets/images/71xaR3qz7TL.jpg
     - assets/images/logo.png
+    - assets/images/not_found_image.jpg  
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

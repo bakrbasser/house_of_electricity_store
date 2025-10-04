@@ -29,7 +29,7 @@ class ProductsList extends StatelessWidget {
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.55,
         mainAxisSpacing: Spacing.medium,
       ),
       itemBuilder: (context, index) => ProductBox(product: products[index]),

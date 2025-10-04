@@ -14,6 +14,7 @@ class QueryByCategoryUseCase {
       return repository.queryByCategory([categoryId], page);
     } else {
       final categoriesIds = categories.map((e) => e.id).toList();
+      categoriesIds.add(categoryId);
       return repository.queryByCategory(categoriesIds, page);
     }
   }

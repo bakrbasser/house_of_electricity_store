@@ -8,6 +8,7 @@ import 'package:house_of_electricity/src/core/presentation/sizes.dart';
 
 import 'package:house_of_electricity/src/features/cart_items/domain/entities/cart_product.dart';
 import 'package:house_of_electricity/src/features/cart_items/presentation/cubit/cart_items_cubit.dart';
+import 'package:house_of_electricity/src/features/product/presentation/widgets/product_boxes_resources.dart';
 
 class CartItemBoxLayout extends StatelessWidget {
   const CartItemBoxLayout({super.key, required this.cartProduct});
@@ -33,24 +34,14 @@ class CartItemBoxLayout extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                SizedBox(
-                  height: boxHeight - 16, // subtract padding
-                  width: screenWidthPercentage(context, 25),
-                  child: Image.asset(
-                    'assets/images/71xaR3qz7TL.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                ProductImageHelper(imageUrl: cartProduct.product.imageUrl),
                 const SizedBox(width: Spacing.small),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(cartProduct.product.name, style: IBMMedium()),
-                      Text(
-                        '${cartProduct.product.price}\$',
-                        style: IBMMedium(),
-                      ),
+                      ProductNameWidget(productName: cartProduct.product.name),
+                      ProductPriceWidget(price: cartProduct.product.price),
                       Spacer(),
                       Row(
                         children: [

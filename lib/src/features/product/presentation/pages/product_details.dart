@@ -5,6 +5,7 @@ import 'package:house_of_electricity/src/core/presentation/sizes.dart';
 import 'package:house_of_electricity/src/features/cart_items/presentation/widgets/add_to_cart_button.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/widgets/add_to_favorites_button.dart';
 import 'package:house_of_electricity/src/features/product/domain/entities/product.dart';
+import 'package:house_of_electricity/src/features/product/presentation/widgets/product_boxes_resources.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/share_product.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -41,7 +42,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             spacing: Spacing.small,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/71xaR3qz7TL.jpg', fit: BoxFit.cover),
+              ProductImageHelper(imageUrl: widget.product?.imageUrl),
               Text(widget.product!.name, style: IBMMedium(fontSize: Sizes.s20)),
               SizedBox(height: Spacing.small),
               Text('الوصف', style: IBMBold(fontSize: Sizes.s24)),
