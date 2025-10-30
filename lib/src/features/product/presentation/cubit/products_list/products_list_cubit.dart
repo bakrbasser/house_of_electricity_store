@@ -6,7 +6,12 @@ import 'package:meta/meta.dart';
 
 part 'products_list_state.dart';
 
-class HomeProductsListCubit extends Cubit<HomeProductsListState> {
+// abstract class ProductsListCubit {
+//   Future<void> call();
+//   bool qualifies();
+// }
+
+class HomeProductsListCubit extends Cubit<ProductsListState> {
   HomeProductsListCubit(this._getHomePageProductsUseCase)
     : super(ProductsListInitial());
 

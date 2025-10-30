@@ -73,6 +73,8 @@ Exception mapToFailure(Object e) {
     return NetworkException();
   } else if (e is PostgrestException) {
     return DatabaseException();
+  } else if (e is AuthRetryableFetchException) {
+    return ServerException();
   } else if (e is StorageException) {
     return StorageException();
   } else if (e is EmptyNameField) {

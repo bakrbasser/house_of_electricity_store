@@ -21,8 +21,7 @@ enum Pages {
   home('/home'),
   categories('/categories'),
   favorites('/favorites'),
-  cart('/cart'),
-  location('/location');
+  cart('/cart');
 
   const Pages(this.path);
   final String path;

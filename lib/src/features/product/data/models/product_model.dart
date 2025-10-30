@@ -30,7 +30,7 @@ class ProductModel extends Product {
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     id: json['id'],
     name: json['name'],
-    description: json['description'] ?? 'no description',
+    description: json['description'] ?? 'لا يوجد وصف للمنتج',
     price: toDouble(json['price'])!,
     createdAt: DateTime.parse(json['created_at']),
     categoryId: json['category_id'],

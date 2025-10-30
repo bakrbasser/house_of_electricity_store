@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/cubit/favorites_list/favorites_cubit.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/widgets/favorite_product_box.dart';
+import 'package:house_of_electricity/src/core/presentation/fonts_manager.dart';
 
 class FavoriteItemsPage extends StatefulWidget {
   const FavoriteItemsPage({super.key});
@@ -27,7 +28,12 @@ class _FavoriteItemsPageState extends State<FavoriteItemsPage> {
           } else if (state is FavoritesFull) {
             final products = state.favorites;
             if (products.isEmpty) {
-              return const Center(child: Text('No favorite items found.'));
+              return Center(
+                child: Text(
+                  'لا يوجد عناصر مضافة الى المفضلة',
+                  style: IBMBold(),
+                ),
+              );
             }
             return FavoriteProductBoxList(products: products);
           } else if (state is FavoritesFailed) {

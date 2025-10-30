@@ -4,6 +4,7 @@ import 'package:house_of_electricity/src/core/presentation/app_colors.dart';
 import 'package:house_of_electricity/src/core/presentation/dialogs.dart';
 import 'package:house_of_electricity/src/core/presentation/fonts_manager.dart';
 import 'package:house_of_electricity/src/core/presentation/sizes.dart';
+import 'package:house_of_electricity/src/features/product/presentation/cubit/products_list/products_list_cubit.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/products_list.dart';
 import 'package:house_of_electricity/src/features/search/presentation/cubit/query_products_cubit.dart';
 import 'package:house_of_electricity/src/features/search/presentation/widgets/search_product_field.dart';
@@ -89,9 +90,9 @@ class QueryingProductsListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<QueryProductsCubit, QueryProductsState>(
+    return BlocListener<QueryProductsCubit, ProductsListState>(
       listener: (context, state) {
-        if (state is QueryProductsFailed) {
+        if (state is ProductsListFailed) {
           showAlertDialog(
             context,
             state.message,
@@ -144,18 +145,18 @@ class QueryingProductsListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<QueryProductsCubit, QueryProductsState>(
+    return BlocBuilder<QueryProductsCubit, ProductsListState>(
       builder: (context, state) {
-        if (state is QueryProductsEmpty) {
+        if (state is ProductsLisEmpty) {
           return Center(
             child: Text(
               'لا يوجد منتجات تطابق جملة البحث المدخل يرجى اعادة المحاولة باستخدام جملة بحث اخرى',
               style: IBMRegular(),
             ),
           );
-        } else if (state is QueryProductsLoading) {
+        } else if (state is ProductsListLoading) {
           return Center(child: CircularProgressIndicator());
-        } else if (state is QueryProductsSucceeded) {
+        } else if (state is ProductsListFull) {
           return Expanded(child: ProductsList(products: state.products));
         }
         return SizedBox();

@@ -71,11 +71,6 @@ class MainBottomNavigationBar extends StatelessWidget {
           activeIcon: Icon(Icons.favorite),
           label: 'المفضلة',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.pin_drop_outlined),
-          activeIcon: Icon(Icons.pin_drop),
-          label: 'موقعنا',
-        ),
       ],
     );
   }

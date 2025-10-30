@@ -68,7 +68,7 @@ class _PaginatedProductsListState extends State<_PaginatedProductsList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HomeProductsListCubit, HomeProductsListState>(
+    return BlocListener<HomeProductsListCubit, ProductsListState>(
       listener: (context, state) {
         if (isLoading == true) {
           isLoading = false;

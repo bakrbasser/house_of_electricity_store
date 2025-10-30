@@ -35,7 +35,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(actions: [ShareProduct()]),
+        appBar: AppBar(actions: [ShareProduct(product: widget.product!)]),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -43,6 +43,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProductImageHelper(imageUrl: widget.product?.imageUrl),
+              SizedBox(height: Spacing.small),
               Text(widget.product!.name, style: IBMMedium(fontSize: Sizes.s20)),
               SizedBox(height: Spacing.small),
               Text('الوصف', style: IBMBold(fontSize: Sizes.s24)),

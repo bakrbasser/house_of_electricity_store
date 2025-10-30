@@ -27,3 +27,4 @@ class Spacing {
   static const double large = 32.0;
   static const double huge = 64.0;
 }
+

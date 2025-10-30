@@ -5,7 +5,6 @@ import 'package:house_of_electricity/src/core/presentation/app_colors.dart';
 import 'package:house_of_electricity/src/core/presentation/fonts_manager.dart';
 import 'package:house_of_electricity/src/core/presentation/screen_size_helper.dart';
 import 'package:house_of_electricity/src/core/presentation/sizes.dart';
-
 import 'package:house_of_electricity/src/features/cart_items/domain/entities/cart_product.dart';
 import 'package:house_of_electricity/src/features/cart_items/presentation/cubit/cart_items_cubit.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/product_boxes_resources.dart';
