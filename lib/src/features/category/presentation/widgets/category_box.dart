@@ -16,6 +16,7 @@ class CategoryCircularBox extends StatelessWidget {
     return SizedBox(
       width: screenWidthPercentage(context, 20),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
             style: IconButton.styleFrom(

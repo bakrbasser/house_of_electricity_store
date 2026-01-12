@@ -9,6 +9,12 @@ class SupabaseAuthRepo implements AuthRepo {
 
   @override
   Future<bool> isLoggedIn() async {
+    // try {
+    //   await _authClient.refreshSession();
+    // } catch (e) {
+    //   await _authClient.signOut();
+    // }
+
     if (_authClient.currentSession != null) {
       return true;
     }

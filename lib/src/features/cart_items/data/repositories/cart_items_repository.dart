@@ -20,12 +20,12 @@ class SupabaseCartItemsRepository implements CartItemsRepository {
 
     guardCall(
       call: () async {
-        return await _client
+        await _client
             .from(tableName(Tables.cartItems))
             .insert(model.toSupabase());
+        _ids.add(product.id);
       },
     );
-    _ids.add(product.id);
   }
 
   @override
@@ -65,18 +65,19 @@ id
   }
 
   @override
-  Future<void> updateQuantity(int id, int quantity) async {
+  Future<void> updateQuantity(int productId, int quantity) async {
     String userUuid = _client.auth.currentUser!.id;
 
-    guardCall(
+    await guardCall(
       call: () async {
-        return await _client
+        await _client
             .from(tableName(Tables.cartItems))
             .update({'quantity': quantity})
-            .eq('id', id)
+            .eq('product_id', productId)
             .eq('user_uuid', userUuid);
       },
     );
+    return;
   }
 
   @override

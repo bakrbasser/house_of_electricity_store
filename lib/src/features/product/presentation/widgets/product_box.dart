@@ -12,34 +12,32 @@ class ProductBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: InkWell(
-        onTap: () {
-          context.push('/details/${product.id}', extra: product);
-        },
-        child: Card(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProductImageHelper(imageUrl: product.imageUrl),
-                SizedBox(height: Spacing.small),
-                ProductNameWidget(productName: product.name),
-                SizedBox(height: Spacing.tiny),
-                ProductPriceWidget(price: product.price),
-                Spacer(),
-                Row(
-                  children: [
-                    AddToFavoritesButton(product: product),
-                    Spacer(),
-                    AddToCartButton(product: product),
-                  ],
-                ),
-              ],
-            ),
+    return InkWell(
+      onTap: () {
+        context.push('/details/${product.id}', extra: product);
+      },
+      child: Card(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImageHelper(imageUrl: product.imageUrl),
+              SizedBox(height: Spacing.small),
+              ProductNameWidget(productName: product.name),
+              SizedBox(height: Spacing.tiny),
+              ProductPriceWidget(price: product.price),
+              Spacer(),
+              Row(
+                children: [
+                  AddToFavoritesButton(product: product),
+                  Spacer(),
+                  AddToCartButton(product: product),
+                ],
+              ),
+            ],
           ),
         ),
       ),

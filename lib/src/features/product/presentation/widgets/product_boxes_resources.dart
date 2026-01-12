@@ -10,18 +10,20 @@ class ProductImageHelper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // in case no url was sent
     if (imageUrl == null || imageUrl!.isEmpty) {
       return ClipRRect(
         borderRadius: BorderRadiusGeometry.vertical(
           top: Radius.circular(RadiusV.v4),
         ),
         child: Image.asset(
-          'assets/images/not_found_image.jpg',
+          'assets/images/Image-not-found.png',
           fit: BoxFit.cover,
           semanticLabel: 'No product image available',
         ),
       );
     }
+    //else if a url was sent
     return AspectRatio(
       aspectRatio: 1,
       child: ClipRRect(
@@ -31,9 +33,10 @@ class ProductImageHelper extends StatelessWidget {
         child: Image.network(
           imageUrl!,
           fit: BoxFit.cover,
+
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
-              'assets/images/not_found_image.jpg',
+              'assets/images/Image-not-found.png',
               fit: BoxFit.cover,
               semanticLabel: 'No product image available',
             );

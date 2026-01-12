@@ -5,6 +5,7 @@ import 'package:house_of_electricity/src/core/presentation/app_colors.dart';
 import 'package:house_of_electricity/src/core/presentation/fonts_manager.dart';
 import 'package:house_of_electricity/src/core/presentation/sizes.dart';
 import 'package:house_of_electricity/src/features/search/presentation/cubit/query_products_cubit.dart';
+import 'package:house_of_electricity/src/features/search/presentation/widgets/search_cotroller.dart';
 
 enum SearchFieldType { home, regular }
 
@@ -35,14 +36,9 @@ InputDecoration appFieldDecoration({
 }
 
 class SearchProductField extends StatefulWidget {
-  const SearchProductField({
-    super.key,
-    required this.searchFieldType,
-    this.searchFieldInit,
-  });
+  const SearchProductField({super.key, required this.searchFieldType});
 
   final SearchFieldType searchFieldType;
-  final String? searchFieldInit;
 
   @override
   State<SearchProductField> createState() => _SearchProductFieldState();
@@ -52,23 +48,18 @@ class _SearchProductFieldState extends State<SearchProductField> {
   @override
   void initState() {
     super.initState();
-    widget.searchFieldInit != null
-        ? controller.text = widget.searchFieldInit!
-        : null;
   }
 
   void search() {
-    if (controller.text.isEmpty) {
+    if (searchController.text.isEmpty) {
       return;
     }
     if (widget.searchFieldType == SearchFieldType.home) {
-      context.push('/home/search/${controller.text}');
+      context.push('/home/search/${searchController.text}');
     } else {
-      context.read<QueryProductsCubit>().queryByName(controller.text);
+      context.read<QueryProductsCubit>().queryByName();
     }
   }
-
-  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +68,7 @@ class _SearchProductFieldState extends State<SearchProductField> {
       onSubmitted: (value) {
         search();
       },
-      controller: controller,
+      controller: searchController,
       decoration: appFieldDecoration(
         hint: 'ابحث هنا...',
         suffixIcon: IconButton(onPressed: search, icon: Icon(Icons.search)),

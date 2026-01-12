@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:house_of_electricity/src/core/presentation/dialogs.dart';
+import 'package:house_of_electricity/src/core/presentation/screen_size_helper.dart';
 import 'package:house_of_electricity/src/core/presentation/sizes.dart';
 import 'package:house_of_electricity/src/features/product/domain/entities/product.dart';
 import 'package:house_of_electricity/src/features/product/presentation/cubit/products_list/products_list_cubit.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/product_box.dart';
+
+enum ProductsListType { grid, singleHorizontal }
 
 class ProductsList extends StatelessWidget {
   const ProductsList({
@@ -12,6 +15,7 @@ class ProductsList extends StatelessWidget {
     required this.products,
     this.controller,
     this.scrollPhysics,
+    this.productsListType,
   });
 
   final List<Product> products;
@@ -19,6 +23,37 @@ class ProductsList extends StatelessWidget {
   final ScrollController? controller;
 
   final ScrollPhysics? scrollPhysics;
+  final ProductsListType? productsListType;
+
+  @override
+  Widget build(BuildContext context) {
+    if (productsListType == ProductsListType.singleHorizontal) {
+      return ProductsSingleHorizontal(
+        scrollPhysics: scrollPhysics,
+        controller: controller,
+        products: products,
+      );
+    } else {
+      return ProductsGridList(
+        scrollPhysics: scrollPhysics,
+        controller: controller,
+        products: products,
+      );
+    }
+  }
+}
+
+class ProductsGridList extends StatelessWidget {
+  const ProductsGridList({
+    super.key,
+    required this.scrollPhysics,
+    required this.controller,
+    required this.products,
+  });
+
+  final ScrollPhysics? scrollPhysics;
+  final ScrollController? controller;
+  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +64,37 @@ class ProductsList extends StatelessWidget {
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+
         childAspectRatio: 0.55,
         mainAxisSpacing: Spacing.medium,
       ),
+      itemBuilder: (context, index) => ProductBox(product: products[index]),
+    );
+  }
+}
+
+class ProductsSingleHorizontal extends StatelessWidget {
+  const ProductsSingleHorizontal({
+    super.key,
+    required this.scrollPhysics,
+    required this.controller,
+    required this.products,
+  });
+
+  final ScrollPhysics? scrollPhysics;
+  final ScrollController? controller;
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // shrinkWrap: true,
+      physics: scrollPhysics,
+      controller: controller,
+      itemCount: products.length,
+      scrollDirection: Axis.horizontal,
+
+      itemExtent: screenHeightPercentage(context, 20),
       itemBuilder: (context, index) => ProductBox(product: products[index]),
     );
   }

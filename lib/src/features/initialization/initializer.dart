@@ -20,12 +20,12 @@ class Initializer {
        _fetchFavoriteProductIdsUseCase = fetchFavoriteProductIdsUseCase;
 
   Future<void> init() async {
-    // Categories
-    await _categoryRepository.fetchAllCategories();
     // Auth
     if (!await _authRepo.isLoggedIn()) {
       await _authRepo.logInAnonymously();
     }
+    // Categories
+    await _categoryRepository.fetchAllCategories();
     // cart
     await _fetchCartItemsIds.call();
     // favorites

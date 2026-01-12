@@ -64,6 +64,7 @@ Products(*)''')
         .toList();
   }
 
+  //FIX THIS SHIT BEFORE I GO CRAZY
   @override
   Future<void> removeFromFavorites(int productId) async {
     await guardCall(

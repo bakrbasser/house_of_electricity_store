@@ -17,6 +17,7 @@ class CategoriesHorizontalLists extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
+
       itemCount: categories.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(left: Spacing.small),

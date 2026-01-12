@@ -4,6 +4,7 @@ import 'package:house_of_electricity/src/features/product/domain/entities/produc
 import 'package:house_of_electricity/src/features/product/domain/use_cases/query_by_category_usecase.dart';
 import 'package:house_of_electricity/src/features/product/domain/use_cases/query_by_name_usecase.dart';
 import 'package:house_of_electricity/src/features/product/presentation/cubit/products_list/products_list_cubit.dart';
+import 'package:house_of_electricity/src/features/search/presentation/widgets/search_cotroller.dart';
 
 class QueryProductsCubit extends Cubit<ProductsListState> {
   QueryProductsCubit(this._queryByNameUseCase, this._queryByCategoryUseCase)
@@ -15,10 +16,10 @@ class QueryProductsCubit extends Cubit<ProductsListState> {
   List<Product> _products = [];
   List<Product> _filteredProducts = [];
 
-  Future<void> queryByName(String query) async {
+  Future<void> queryByName() async {
     emit(ProductsListLoading());
     try {
-      _products = await _queryByNameUseCase.call(query);
+      _products = await _queryByNameUseCase.call(searchController.text);
       _filteredProducts = _products;
       if (_products.isEmpty) {
         emit(ProductsLisEmpty());

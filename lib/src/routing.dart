@@ -7,12 +7,11 @@ import 'package:house_of_electricity/src/features/category/presentation/cubit/ca
 import 'package:house_of_electricity/src/features/category/presentation/pages/categories_page.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/cubit/favorites_list/favorites_cubit.dart';
 import 'package:house_of_electricity/src/features/favorites/presentation/pages/favorite_items_page.dart';
-import 'package:house_of_electricity/src/features/home/home_widgets.dart';
 import 'package:house_of_electricity/src/features/initialization/presentation/cubit/initializer_cubit.dart';
 import 'package:house_of_electricity/src/features/initialization/presentation/initial_screen.dart';
 import 'package:house_of_electricity/src/features/product/domain/entities/product.dart';
 import 'package:house_of_electricity/src/features/product/presentation/cubit/products_list/products_list_cubit.dart';
-import 'package:house_of_electricity/src/features/product/presentation/pages/home_page.dart';
+import 'package:house_of_electricity/src/features/home/home_page.dart';
 import 'package:house_of_electricity/src/features/product/presentation/pages/product_details.dart';
 import 'package:house_of_electricity/src/features/search/presentation/cubit/query_products_cubit.dart';
 import 'package:house_of_electricity/src/features/search/presentation/pages/searched_products_page.dart';
@@ -115,7 +114,10 @@ final router = GoRouter(
       builder: (context, state) {
         int productID = int.parse(state.pathParameters['id']!);
         Product? product = state.extra as Product?;
-        return ProductDetails(productID: productID, product: product);
+        return BlocProvider(
+          create: (context) => di.get<QueryProductsCubit>(),
+          child: ProductDetails(productID: productID, product: product),
+        );
       },
     ),
   ],

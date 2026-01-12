@@ -14,33 +14,22 @@ class AddToFavoritesButton extends StatefulWidget {
   State<AddToFavoritesButton> createState() => _AddToFavoritesButtonState();
 }
 
-class _AddToFavoritesButtonState extends State<AddToFavoritesButton> {
-  bool isFavorite = false;
+class _AddToFavoritesButtonState extends State<AddToFavoritesButton>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
 
+  bool isFavorite = false;
   final unFavoriteIcon = Icon(
     Icons.favorite_border,
     color: AppColors.darkerGrey,
     size: Sizes.s28,
   );
-
   final favoriteIcon = Icon(Icons.favorite, color: Colors.red, size: Sizes.s28);
 
   late Widget child;
 
-  void onPressed() {
-    setState(() {
-      if (isFavorite) {
-        context.read<FavoritesOperationsCubit>().removeFromFavorites(
-          widget.product.id,
-        );
-        isFavorite = false;
-        child = unFavoriteIcon;
-      } else {
-        context.read<FavoritesOperationsCubit>().addToFavorites(widget.product);
-        isFavorite = true;
-        child = favoriteIcon;
-      }
-    });
+  void onPressed() async {
+    controller.reverse();
   }
 
   @override
@@ -50,10 +39,43 @@ class _AddToFavoritesButtonState extends State<AddToFavoritesButton> {
       widget.product.id,
     );
     child = isFavorite ? favoriteIcon : unFavoriteIcon;
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 750),
+      value: 1.0,
+    );
+    controller.addListener(() {
+      if (controller.value == 0) {
+        setState(() {
+          if (isFavorite) {
+            context.read<FavoritesOperationsCubit>().removeFromFavorites(
+              widget.product.id,
+            );
+            isFavorite = false;
+            child = unFavoriteIcon;
+          } else {
+            context.read<FavoritesOperationsCubit>().addToFavorites(
+              widget.product,
+            );
+            isFavorite = true;
+            child = favoriteIcon;
+          }
+        });
+        controller.forward();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(onPressed: onPressed, icon: child);
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) {
+        return Transform.scale(
+          scale: controller.value,
+          child: IconButton(onPressed: onPressed, icon: child),
+        );
+      },
+    );
   }
 }

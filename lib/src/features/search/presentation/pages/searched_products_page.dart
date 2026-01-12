@@ -18,9 +18,8 @@ class QueryProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SearchedProductsPage(
       queryingFunction: () {
-        context.read<QueryProductsCubit>().queryByName(query);
+        context.read<QueryProductsCubit>().queryByName();
       },
-      query: query,
     );
   }
 }
@@ -35,20 +34,14 @@ class CategoryProductList extends StatelessWidget {
       queryingFunction: () {
         context.read<QueryProductsCubit>().queryByCategory(categoryId, null);
       },
-      query: '',
     );
   }
 }
 
 class SearchedProductsPage extends StatefulWidget {
-  const SearchedProductsPage({
-    super.key,
-    required this.queryingFunction,
-    this.query,
-  });
+  const SearchedProductsPage({super.key, required this.queryingFunction});
 
   final void Function() queryingFunction;
-  final String? query;
 
   @override
   State<SearchedProductsPage> createState() => _SearchedProductsPageState();
@@ -68,10 +61,7 @@ class _SearchedProductsPageState extends State<SearchedProductsPage> {
         children: [
           SortSearchRow(widget: widget),
           SizedBox(height: Spacing.small),
-          QueryingProductsListener(
-            query: widget.query ?? '',
-            child: QueryingProductsListBuilder(),
-          ),
+          QueryingProductsListener(child: QueryingProductsListBuilder()),
         ],
       ),
     );
@@ -79,14 +69,9 @@ class _SearchedProductsPageState extends State<SearchedProductsPage> {
 }
 
 class QueryingProductsListener extends StatelessWidget {
-  const QueryingProductsListener({
-    super.key,
-    required this.child,
-    required this.query,
-  });
+  const QueryingProductsListener({super.key, required this.child});
 
   final Widget child;
-  final String query;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +83,7 @@ class QueryingProductsListener extends StatelessWidget {
             state.message,
             okMessage: 'اعادة المحاولة',
             onOk: () {
-              context.read<QueryProductsCubit>().queryByName(query);
+              context.read<QueryProductsCubit>().queryByName();
             },
           );
         }
@@ -118,10 +103,7 @@ class SortSearchRow extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: SearchProductField(
-            searchFieldType: SearchFieldType.regular,
-            searchFieldInit: widget.query,
-          ),
+          child: SearchProductField(searchFieldType: SearchFieldType.regular),
         ),
         Directionality(
           textDirection: TextDirection.ltr,
@@ -141,7 +123,8 @@ class SortSearchRow extends StatelessWidget {
 }
 
 class QueryingProductsListBuilder extends StatelessWidget {
-  const QueryingProductsListBuilder({super.key});
+  const QueryingProductsListBuilder({super.key, this.productsListType});
+  final ProductsListType? productsListType;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +140,12 @@ class QueryingProductsListBuilder extends StatelessWidget {
         } else if (state is ProductsListLoading) {
           return Center(child: CircularProgressIndicator());
         } else if (state is ProductsListFull) {
-          return Expanded(child: ProductsList(products: state.products));
+          return Expanded(
+            child: ProductsList(
+              products: state.products,
+              productsListType: productsListType,
+            ),
+          );
         }
         return SizedBox();
       },
