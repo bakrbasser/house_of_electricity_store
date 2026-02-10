@@ -21,6 +21,16 @@ class CategoryRectangularBox extends StatefulWidget {
 
 class _CategoryRectangularBoxState extends State<CategoryRectangularBox> {
   Widget leading = Icon(Icons.keyboard_double_arrow_down_sharp);
+  late Widget trailing;
+
+  @override
+  void initState() {
+    super.initState();
+    trailing = CategoryIcon(
+      iconUrl: widget.category.iconUrl,
+      color: Colors.black,
+    );
+  }
 
   void expand(bool val) {
     setState(() {
@@ -39,10 +49,8 @@ class _CategoryRectangularBoxState extends State<CategoryRectangularBox> {
       leading: leading,
       onExpansionChanged: expand,
       title: Text(widget.category.name, style: IBMBold()),
-      trailing: CategoryIcon(
-        iconUrl: widget.category.iconUrl,
-        color: Colors.black,
-      ),
+      trailing: trailing,
+
       shape: BeveledRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(RadiusV.v4),
         side: BorderSide(color: AppColors.grey),
@@ -74,7 +82,6 @@ class SubCategoriesTile extends StatelessWidget {
         goToCategoryProductsList(context, subCategory.id);
       },
       title: Text(subCategory.name, style: IBMBold()),
-      trailing: CategoryIcon(iconUrl: subCategory.iconUrl, color: Colors.black),
       tileColor: AppColors.lightGrey,
       shape: BeveledRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(RadiusV.v4),

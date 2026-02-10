@@ -3,7 +3,7 @@ import 'package:house_of_electricity/src/features/product/domain/entities/produc
 import 'package:house_of_electricity/src/features/product/domain/repositories/product_repository.dart';
 
 class QueryByCategoryUseCase {
-  final ProductRepository repository;
+  final ProductsRepository repository;
   final CategoryRepository categoryRepository;
 
   QueryByCategoryUseCase(this.repository, this.categoryRepository);

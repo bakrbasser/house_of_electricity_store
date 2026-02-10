@@ -21,6 +21,7 @@ class _FavoriteItemsPageState extends State<FavoriteItemsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('عناصر المفضلة')),
       body: BlocBuilder<FavoritesListCubit, FavoritesListState>(
         builder: (context, state) {
           if (state is FavoritesLoading) {

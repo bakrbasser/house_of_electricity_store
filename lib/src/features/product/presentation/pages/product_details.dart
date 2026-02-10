@@ -10,7 +10,6 @@ import 'package:house_of_electricity/src/features/product/domain/entities/produc
 import 'package:house_of_electricity/src/features/product/presentation/cubit/products_list/products_list_cubit.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/product_boxes_resources.dart';
 import 'package:house_of_electricity/src/features/product/presentation/widgets/products_list.dart';
-import 'package:house_of_electricity/src/features/product/presentation/widgets/share_product.dart';
 import 'package:house_of_electricity/src/features/search/presentation/cubit/query_products_cubit.dart';
 import 'package:house_of_electricity/src/features/search/presentation/pages/searched_products_page.dart';
 
@@ -39,7 +38,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(actions: [ShareProduct(product: widget.product!)]),
+        appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           // this listener deletes the opened product from the related products list
@@ -59,15 +58,26 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ProductImageHelper(imageUrl: widget.product?.imageUrl),
                   SizedBox(height: Spacing.small),
                   Text(
+                    '\$ ${widget.product!.price}',
+                    style: IBMBold(
+                      color: AppColors.mainGreen,
+                      fontSize: Sizes.s24,
+                    ),
+                  ),
+                  Text(
                     widget.product!.name,
-                    style: IBMMedium(fontSize: Sizes.s20),
+                    style: IBMBold(
+                      fontSize: Sizes.s24,
+                      color: AppColors.mainGreen,
+                    ),
                   ),
                   SizedBox(height: Spacing.small),
                   Text('الوصف', style: IBMBold(fontSize: Sizes.s24)),
-                  Text(widget.product!.description, style: IBMMedium()),
+                  Text(
+                    widget.product!.description,
+                    style: IBMMedium(fontSize: Sizes.s20),
+                  ),
                   SizedBox(height: Spacing.small),
-                  Text('السعر', style: IBMBold(fontSize: Sizes.s24)),
-                  Text('${widget.product!.price} دولار', style: IBMMedium()),
                   SizedBox(height: Spacing.small),
                   Text('منتجات مماثلة', style: IBMBold(fontSize: Sizes.s24)),
                   SizedBox(

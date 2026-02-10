@@ -7,9 +7,21 @@ import 'package:house_of_electricity/src/core/presentation/supabase_image_helper
 import 'package:house_of_electricity/src/features/category/domain/entities/category.dart';
 import 'package:house_of_electricity/src/features/category/presentation/widgets/category_tile.dart';
 
-class CategoryCircularBox extends StatelessWidget {
+class CategoryCircularBox extends StatefulWidget {
   const CategoryCircularBox({super.key, required this.category});
   final Category category;
+
+  @override
+  State<CategoryCircularBox> createState() => _CategoryCircularBoxState();
+}
+
+class _CategoryCircularBoxState extends State<CategoryCircularBox> {
+  late Widget icon;
+  @override
+  void initState() {
+    super.initState();
+    icon = CategoryIcon(iconUrl: widget.category.iconUrl);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +38,13 @@ class CategoryCircularBox extends StatelessWidget {
               fixedSize: Size.fromRadius(screenWidthPercentage(context, 6)),
             ),
             onPressed: () {
-              goToCategoryProductsList(context, category.id);
+              goToCategoryProductsList(context, widget.category.id);
             },
-            icon: CategoryIcon(iconUrl: category.iconUrl),
+            icon: icon,
           ),
           SizedBox(height: Spacing.small),
           Text(
-            category.name,
+            widget.category.name,
             textAlign: TextAlign.center,
             style: IBMRegular(fontSize: Sizes.s16),
           ),

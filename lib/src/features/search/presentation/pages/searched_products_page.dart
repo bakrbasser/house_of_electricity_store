@@ -57,6 +57,7 @@ class _SearchedProductsPageState extends State<SearchedProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('نتائج البحث')),
       body: Column(
         children: [
           SortSearchRow(widget: widget),
@@ -131,10 +132,12 @@ class QueryingProductsListBuilder extends StatelessWidget {
     return BlocBuilder<QueryProductsCubit, ProductsListState>(
       builder: (context, state) {
         if (state is ProductsLisEmpty) {
-          return Center(
-            child: Text(
-              'لا يوجد منتجات تطابق جملة البحث المدخل يرجى اعادة المحاولة باستخدام جملة بحث اخرى',
-              style: IBMRegular(),
+          return Expanded(
+            child: Center(
+              child: Text(
+                'لا يوجد منتجات تطابق جملة البحث المدخل يرجى اعادة المحاولة باستخدام جملة بحث اخرى',
+                style: IBMRegular(),
+              ),
             ),
           );
         } else if (state is ProductsListLoading) {

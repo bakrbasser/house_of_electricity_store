@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 
 class MockCategoryRepo extends Mock implements CategoryRepository {}
 
-class MockProductRepo extends Mock implements ProductRepository {}
+class MockProductRepo extends Mock implements ProductsRepository {}
 
 final mockSubCategories = {
   1: [

@@ -7,6 +7,7 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('الفئات')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

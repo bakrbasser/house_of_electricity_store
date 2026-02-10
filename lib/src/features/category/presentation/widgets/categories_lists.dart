@@ -16,6 +16,7 @@ class CategoriesHorizontalLists extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+
       scrollDirection: Axis.horizontal,
 
       itemCount: categories.length,

@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:house_of_electricity/src/features/auth/data/repo/supabase_auth_repo.dart';
 import 'package:house_of_electricity/src/features/auth/domain/repo/auth_repo.dart';
-import 'package:house_of_electricity/src/features/cart_items/data/repositories/cart_items_repository.dart';
+import 'package:house_of_electricity/src/features/cart_items/data/repositories/supabase_cart_items_repository.dart';
 import 'package:house_of_electricity/src/features/cart_items/domain/repositories/cart_items_repository.dart';
 import 'package:house_of_electricity/src/features/cart_items/domain/use_cases/add_to_cart.dart';
 import 'package:house_of_electricity/src/features/cart_items/domain/use_cases/clear_cart_use_case.dart';
@@ -29,7 +29,7 @@ import 'package:house_of_electricity/src/features/favorites/presentation/cubit/f
 import 'package:house_of_electricity/src/features/initialization/domain/initi_use_case.dart';
 import 'package:house_of_electricity/src/features/initialization/initializer.dart';
 import 'package:house_of_electricity/src/features/initialization/presentation/cubit/initializer_cubit.dart';
-import 'package:house_of_electricity/src/features/product/data/repositories/supabase/products_repository.dart';
+import 'package:house_of_electricity/src/features/product/data/repositories/supabase_products_repository.dart';
 import 'package:house_of_electricity/src/features/product/domain/repositories/product_repository.dart';
 import 'package:house_of_electricity/src/features/product/domain/use_cases/get_home_page_products_usecase.dart';
 import 'package:house_of_electricity/src/features/product/domain/use_cases/query_by_category_usecase.dart';
@@ -57,7 +57,7 @@ void initDi() {
 }
 
 void _initRepos() {
-  di.registerLazySingleton<ProductRepository>(
+  di.registerLazySingleton<ProductsRepository>(
     () => SupabaseProductsRepository(client: _supabase.client),
   );
   di.registerLazySingleton<CategoryRepository>(
@@ -79,16 +79,16 @@ void _initUseCases() {
     () => InitUseCase(initializer: di.get<Initializer>()),
   );
   di.registerLazySingleton<QueryByNameUseCase>(
-    () => QueryByNameUseCase(di.get<ProductRepository>()),
+    () => QueryByNameUseCase(di.get<ProductsRepository>()),
   );
   di.registerLazySingleton<QueryByCategoryUseCase>(
     () => QueryByCategoryUseCase(
-      di.get<ProductRepository>(),
+      di.get<ProductsRepository>(),
       di.get<CategoryRepository>(),
     ),
   );
   di.registerLazySingleton<GetHomePageProductsUseCase>(
-    () => GetHomePageProductsUseCase(di.get<ProductRepository>()),
+    () => GetHomePageProductsUseCase(di.get<ProductsRepository>()),
   );
   // Categories
   di.registerLazySingleton<GetAllCategoriesUseCase>(

@@ -84,7 +84,7 @@ id
   Future<void> clearCart() async {
     String userUuid = _client.auth.currentUser!.id;
 
-    guardCall(
+    await guardCall(
       call: () async {
         return await _client
             .from(tableName(Tables.cartItems))

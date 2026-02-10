@@ -6,7 +6,7 @@ import 'package:house_of_electricity/src/features/product/domain/entities/produc
 import 'package:house_of_electricity/src/features/product/domain/repositories/product_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseProductsRepository implements ProductRepository {
+class SupabaseProductsRepository implements ProductsRepository {
   final SupabaseClient _client;
 
   SupabaseProductsRepository({required SupabaseClient client})

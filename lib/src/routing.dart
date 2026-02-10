@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:house_of_electricity/src/core/app/di.dart';
+import 'package:house_of_electricity/src/features/about_us/presentation/pages/about_us_page.dart';
 import 'package:house_of_electricity/src/features/cart_items/presentation/cubit/cart_items_cubit.dart';
 import 'package:house_of_electricity/src/features/cart_items/presentation/pages/cart_items_page.dart';
 import 'package:house_of_electricity/src/features/category/presentation/cubit/categories_list/categories_list_cubit.dart';
@@ -20,7 +21,8 @@ enum Pages {
   home('/home'),
   categories('/categories'),
   favorites('/favorites'),
-  cart('/cart');
+  cart('/cart'),
+  aboutUs('/about_us');
 
   const Pages(this.path);
   final String path;
@@ -102,6 +104,13 @@ final router = GoRouter(
               create: (context) => di.get<FavoritesListCubit>(),
               child: FavoriteItemsPage(),
             );
+          },
+        ),
+        GoRoute(
+          path: Pages.aboutUs.path,
+          name: Pages.aboutUs.name,
+          builder: (context, state) {
+            return AboutUsPage();
           },
         ),
       ],

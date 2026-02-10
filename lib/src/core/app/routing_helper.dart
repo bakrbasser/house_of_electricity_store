@@ -3,7 +3,7 @@ int getIndex(String location) {
   if (location.startsWith('/categories')) return 1;
   if (location.startsWith('/cart')) return 2;
   if (location.startsWith('/favorites')) return 3;
-  if (location.startsWith('/location')) return 4;
+  if (location.startsWith('/about_us')) return 4;
   return 0;
 }
 
@@ -18,7 +18,7 @@ String getPath(int index) {
     case 3:
       return '/favorites';
     case 4:
-      return '/location';
+      return '/about_us';
     default:
       return '/home';
   }

@@ -2,7 +2,7 @@ import 'package:house_of_electricity/src/features/product/domain/entities/produc
 import 'package:house_of_electricity/src/features/product/domain/repositories/product_repository.dart';
 
 class QueryByNameUseCase {
-  final ProductRepository _repository;
+  final ProductsRepository _repository;
 
   QueryByNameUseCase(this._repository);
 

@@ -57,11 +57,13 @@ class CartItemsCubit extends Cubit<CartItemsState> {
   }
 
   Future<void> addToItemQuantity(CartProduct cartProduct, int quantity) async {
+    _totalPrice += cartProduct.product.price;
+    _podcastPrice();
     try {
       await _updateQuantity(cartProduct.product.id, quantity);
-      _totalPrice += cartProduct.product.price;
-      _podcastPrice();
     } catch (e) {
+      _totalPrice -= cartProduct.product.price;
+      _podcastPrice();
       emit(CartItemsFailed(e.toString()));
     }
   }
@@ -70,17 +72,22 @@ class CartItemsCubit extends Cubit<CartItemsState> {
     CartProduct cartProduct,
     int quantity,
   ) async {
+    _totalPrice -= cartProduct.product.price;
+    _podcastPrice();
     try {
       await _updateQuantity(cartProduct.product.id, quantity);
-      _totalPrice -= cartProduct.product.price;
-      _podcastPrice();
     } catch (e) {
+      _totalPrice += cartProduct.product.price;
+      _podcastPrice();
       emit(CartItemsFailed(e.toString()));
     }
   }
 
   Future<void> clearCartItems() async {
+    _totalPrice = 0;
+    _podcastPrice();
     try {
+      emit(CartItemsEmpty());
       await _clearCart();
     } catch (e) {
       emit(CartItemsFailed(e.toString()));
